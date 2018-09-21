@@ -1,4 +1,4 @@
-import {conf} from '../conf';
+import conf from '../conf';
 import * as request from 'request-promise-native';
 
 export async function createCse() {

@@ -1,4 +1,4 @@
-export const conf = {};
+const conf = {};
 const cse = {};
 const ae = {};
 const cnt_arr = [];
@@ -24,19 +24,6 @@ ae.port         = '9727';
 ae.bodytype     = 'json'; // select 'json' or 'xml' or 'cbor'
 ae.tasport      = '3105';
 
-// build cnt
-let count = 0;
-cnt_arr[count] = {};
-cnt_arr[count].parent = '/' + cse.name + '/' + ae.name;
-cnt_arr[count].name = 'test_container';
-
-// build sub
-sub_arr[count] = {};
-sub_arr[count].parent = '/' + cse.name + '/' + ae.name + '/' + cnt_arr[0].name;
-sub_arr[count].name = 'sub';
-sub_arr[count++].nu = 'mqtt://' + cse.host + '/' + ae.id + '?ct=' + ae.bodytype; // mqtt
-
-
 conf.usesecure  = 'disable';
 
 if(conf.usesecure === 'enable') {
@@ -46,4 +33,8 @@ if(conf.usesecure === 'enable') {
 conf.cse = cse;
 conf.ae = ae;
 conf.cnt = cnt_arr;
-conf.sub = sub_arr;
+conf.sub = ['/oneM2M/req/Mobius2/bulb1_control_sub/json',
+    '/oneM2M/req/Mobius2/bulb2_control/json',
+    '/oneM2M/req/Mobius2/bulb3_control/json'];
+
+export default conf;

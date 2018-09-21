@@ -1,4 +1,4 @@
-import {conf} from '../conf';
+import conf from '../conf';
 const request = require('request-promise-native');
 
 export async function createAe(ae) {
