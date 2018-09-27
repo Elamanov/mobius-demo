@@ -33,7 +33,7 @@ if(conf.usesecure === 'enable') {
 conf.cse = cse;
 conf.ae = ae;
 conf.cnt = cnt_arr;
-conf.sub = ['/oneM2M/req/Mobius2/bulb1_control_sub/json',
+conf.sub = ['/oneM2M/req/Mobius2/bulb1_control/json',
     '/oneM2M/req/Mobius2/bulb2_control/json',
     '/oneM2M/req/Mobius2/bulb3_control/json'];
 

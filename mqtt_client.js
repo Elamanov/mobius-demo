@@ -1,13 +1,20 @@
 import * as mqtt from 'async-mqtt';
 
-import conf from 'conf';
+import conf from './conf';
+import {amqpConnect, queue} from "./amqp_connection";
 
-const client = mqtt.connect(`mqtt://${conf.cse.host}`);
+const client = mqtt.connect(`mqtt://localhost`);
 conf.sub.forEach(e => client.subscribe(e));
-client.on('message', doStuff);
+client.on('message', control);
 
-async function doStuff(topic, message) {
+async function control(topic, message) {
+    console.log(message);
+    const bulbNumber = topic.charAt(topic.indexOf('bulb') + 4);
     const temp = JSON.parse(Buffer.from(message).toString());
-    console.log(temp);
+    const data = temp.pc['m2m:sgn'].nev.rep['m2m:cin'].con;
+
+    amqpConnect().then(channel => {
+        channel.sendToQueue(queue, new Buffer(bulbNumber.toString() + data));
+    });
 }
 export default client;
